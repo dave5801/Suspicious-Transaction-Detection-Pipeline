@@ -1,3 +1,38 @@
-data_source: "transactions.csv"
-database: "transactions.db"
-flag_threshold: 10000
+# Database Configuration
+database:
+  name: "transactions.db"
+  backup_enabled: true
+  backup_interval_hours: 24
+
+# Transaction Analysis Rules
+analysis:
+  risk_threshold: 0.5
+  high_value_threshold: 10000
+  medium_value_threshold: 5000
+  velocity_threshold: 5  # transactions per hour
+  unusual_hours:
+    start: 22
+    end: 6
+
+# Logging Configuration
+logging:
+  level: INFO
+  file: "logs/pipeline.log"
+  max_size_mb: 10
+  backup_count: 5
+
+# Input/Output Configuration
+io:
+  input_file: "sample_data/transactions.csv"
+  required_columns:
+    - amount
+    - timestamp
+    - transaction_id
+    - account_id
+
+# Feature Flags
+features:
+  enable_velocity_check: true
+  enable_location_check: true
+  enable_time_check: true
+  enable_ml_detection: false
